@@ -1,0 +1,25 @@
+Explanation of Added Rules:
+Default Naming Convention:
+
+Enforces camelCase for all identifiers by default. Allows leading and trailing underscores if needed.
+Variable Naming:
+
+Allows camelCase for normal variables and UPPER_CASE for constants.
+Function Naming:
+
+Enforces camelCase for function names.
+Parameter Naming:
+
+Enforces camelCase for parameters and allows leading underscores for unused parameters.
+Class Naming:
+
+Enforces PascalCase for class names.
+Interface Naming:
+
+Enforces PascalCase and requires interfaces to start with an I.
+Type Alias Naming:
+
+Enforces PascalCase for type aliases.
+Enum and Enum Member Naming:
+
+Enforces PascalCase for enums and UPPER_CASE for enum members.
