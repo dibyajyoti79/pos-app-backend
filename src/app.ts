@@ -1,11 +1,12 @@
 import express, { Application, NextFunction, Request, Response } from 'express'
 import path from 'path'
-import healthRoute from './router/health.route'
+import healthRoute from './routes/health.routes'
 import responseMessage from './constant/responseMessage'
 import helmet from 'helmet'
 import cors from 'cors'
 import { ApiError } from './util/ApiError'
 import { errorMiddleware } from './middleware/error.middleware'
+import reqResLogger from './middleware/logger.middleware'
 
 const app: Application = express()
 
@@ -20,6 +21,8 @@ app.use(
 )
 app.use(express.json())
 app.use(express.static(path.join(__dirname, '../', 'public')))
+
+app.use(reqResLogger)
 
 // Routes
 app.use('/api/v1/', healthRoute)
