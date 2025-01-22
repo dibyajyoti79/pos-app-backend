@@ -1,9 +1,10 @@
-import { Request, Response } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { IHTTPError, IHTTPResponse } from '../types/types'
 import config from '../config/config'
 import { EApplicationEnvironment } from '../constant/application'
 
-const errorMiddleware = (err: IHTTPError, _: Request, res: Response) => {
+// eslint-disable-next-line @typescript-eslint/naming-convention, @typescript-eslint/no-unused-vars
+const errorMiddleware = (err: IHTTPError, _: Request, res: Response, __: NextFunction) => {
     err.message ||= 'Internal Server Error'
     err.statusCode ||= 500
 
