@@ -1,9 +1,15 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable no-console */
 import app from './app'
 import config from './config/config'
+import dbConfig from './config/db-config'
 
-const startServer = () => {
+const startServer = async () => {
     try {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const connection = await dbConfig.connect()
+        console.info(`Connected to database: ${connection.name}`)
+
         const server = app.listen(config.PORT, () => {
             console.info(`Server is running on ${config.SERVER_URL}`)
         })
