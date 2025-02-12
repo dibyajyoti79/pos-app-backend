@@ -7,6 +7,8 @@ import cors from 'cors'
 import { ApiError } from './util/ApiError'
 import { errorMiddleware } from './middleware/error.middleware'
 import reqResLogger from './middleware/logger.middleware'
+import userRouter from './routes/user.routes'
+import outletRouter from './routes/outlet.routes'
 
 const app: Application = express()
 
@@ -26,6 +28,8 @@ app.use(reqResLogger)
 
 // Routes
 app.use('/api/v1/', healthRoute)
+app.use('/api/v1/user', userRouter)
+app.use('/api/v1/outlet', outletRouter)
 
 // 404 Handler
 // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -41,4 +45,3 @@ app.use((_: Request, __: Response, next: NextFunction) => {
 app.use(errorMiddleware)
 
 export default app
-
