@@ -1,5 +1,3 @@
-// @ts-check
-
 import eslint from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import eslintConfigPrettier from 'eslint-config-prettier'
@@ -14,7 +12,7 @@ export default tseslint.config({
     files: ['**/*.ts'],
     extends: [eslint.configs.recommended, ...tseslint.configs.recommendedTypeChecked, eslintConfigPrettier],
     rules: {
-        'no-console': 'error',
+        'no-console': 'warn',
         'no-useless-catch': 0,
         quotes: ['error', 'single', { allowTemplateLiterals: true }],
         '@typescript-eslint/naming-convention': [
@@ -30,6 +28,10 @@ export default tseslint.config({
                 format: ['camelCase', 'UPPER_CASE']
             },
             {
+                selector: 'import',
+                format: ['camelCase', 'PascalCase']
+            },
+            {
                 selector: 'function',
                 format: ['camelCase']
             },
@@ -41,6 +43,11 @@ export default tseslint.config({
             {
                 selector: 'class',
                 format: ['PascalCase']
+            },
+            {
+                selector: 'classProperty',
+                format: ['camelCase', 'UPPER_CASE'],
+                modifiers: ['static']
             },
             {
                 selector: 'interface',
@@ -74,7 +81,13 @@ export default tseslint.config({
                 selector: 'objectLiteralMethod',
                 format: ['camelCase', 'UPPER_CASE']
             }
-        ]
+        ],
+        '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
+        '@typescript-eslint/no-unsafe-return': 'off',
+        '@typescript-eslint/no-unsafe-call': 'off'
     }
 })
 

@@ -25,6 +25,7 @@
         "@commitlint/cli": "^19.6.1",
         "@commitlint/config-conventional": "^19.6.0",
         "@eslint/js": "^9.17.0",
+        "@types/bcrypt": "^5.0.2",
         "@types/cors": "^2.8.17",
         "@types/express": "^5.0.0",
         "@types/morgan": "^1.9.9",
@@ -54,4 +55,3 @@
         "winston-daily-rotate-file": "^5.0.0"
     }
 }
-

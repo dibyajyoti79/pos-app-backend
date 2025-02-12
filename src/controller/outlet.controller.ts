@@ -34,17 +34,17 @@ interface IRegisterOutletRequest {
 }
 
 // Register a new outlet
-const registerOutlet = asyncHandler(async (req: Request<object, object, IRegisterOutletRequest>, res: Response): Promise<void> => {
+const registerOutlet = asyncHandler(async (req: Request, res: Response): Promise<void> => {
     const { name, ownerName, mobile, email, address, gstNo, ...outletDetails } = req.body
 
     // Create a user for the outlet owner
-    const user = (await userService.addUser({
+    const user = await userService.addUser({
         name: ownerName,
         email,
         password: '123456', // Default password (ensure hashing in service)
         mobile,
         role: 'admin'
-    })) as Partial<IUser> // ✅ Fix: Use `Partial<IUser>` for user creation
+    })
 
     if (!user._id) {
         res.status(500).json(new ApiResponse(500, null, responseMessage.SOMETHING_WENT_WRONG))
@@ -52,8 +52,7 @@ const registerOutlet = asyncHandler(async (req: Request<object, object, IRegiste
     }
 
     // Ensure `ownerId` is properly cast to `ObjectId`
-    const ownerId = user._id instanceof Types.ObjectId ? user._id : new Types.ObjectId(user._id.toString())
-
+    const ownerId = user._id
     // Create outlet data object
     const outletData: Omit<IOutlet, 'createdAt' | 'updatedAt'> = {
         ...outletDetails,
@@ -107,3 +106,4 @@ const deleteOutlet = asyncHandler(async (req: Request<Record<string, string>>, r
 
 // Export all functions as a default object
 export default { registerOutlet, editOutlet, deleteOutlet }
+

@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, CallbackError } from 'mongoose'
+import mongoose, { Schema, CallbackError } from 'mongoose'
 import bcrypt from 'bcrypt'
 
 export interface IUser {
@@ -33,9 +33,10 @@ userSchema.pre('save', async function (next) {
 })
 
 userSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
-    return bcrypt.compare(candidatePassword, this.password)
+    return await bcrypt.compare(candidatePassword, this.password)
 }
 
 const user = mongoose.model<IUser>('User', userSchema)
 
 export default user
+
